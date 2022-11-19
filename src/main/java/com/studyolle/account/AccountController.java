@@ -42,10 +42,9 @@ public class AccountController {
         if (errors.hasErrors()) {
             return "account/sign-up";
         }
-        accountService.processNewAccount(signUpForm);
 
-
-
+        Account account = accountService.processNewAccount(signUpForm);
+        accountService.login(account);
         return "redirect:/";
     }
     @GetMapping("/check-email-token")
@@ -54,15 +53,14 @@ public class AccountController {
         String view = "account/checked-email";
         if(account ==null){
             model.addAttribute("error", "wrong.email");
-            return "account/checked-Email";
+            return view;
         }
-        if(!account.getEmailCheckToken().equals(token)){
+        if(account.isValidToken(token)){
             model.addAttribute("error", "wrong.token");
-            return "account/checkedEmail";
+            return view;
         }
-
-        account.setEmailVerified(true);
-        account.setJoinedAt(LocalDateTime.now());
+        account.completeSignUp();
+        accountService.login(account);
         model.addAttribute("numberOfUser", accountRepository.count());
         model.addAttribute("nickname", account.getNickname());
         return view;
