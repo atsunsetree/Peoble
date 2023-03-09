@@ -14,6 +14,6 @@
 <img width="1222" alt="image" src="https://user-images.githubusercontent.com/78211281/224072781-8b858189-92d8-4c4b-98d3-609472d2df47.png">
 
 
-강의 참고 : 스프링과 JPA 기반 웹 애플리케이션 개발 (백기선)
+강의 참고 : 스프링과 JPA 기반 웹 애플리케이션 개발- 스터디 만들기 (백기선)
 
 2022.11~
